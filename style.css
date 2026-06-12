@@ -1633,35 +1633,48 @@ body {
 /* --- Staggered Scroll Animation System --- */
 .animate-item {
   opacity: 0;
-  transform: translateY(40px);
+  transform: translate3d(0, 40px, 0);
   transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1), transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
   will-change: opacity, transform;
 }
 .animate-item.show {
   opacity: 1;
-  transform: translateY(0);
+  transform: translate3d(0, 0, 0);
 }
 
 /* Directional and Scale Variants */
 .animate-item.slide-left {
-  transform: translateX(-40px);
+  transform: translate3d(-80px, 0, 0);
 }
 .animate-item.slide-left.show {
-  transform: translateX(0);
+  transform: translate3d(0, 0, 0);
 }
 
 .animate-item.slide-right {
-  transform: translateX(40px);
+  transform: translate3d(80px, 0, 0);
 }
 .animate-item.slide-right.show {
-  transform: translateX(0);
+  transform: translate3d(0, 0, 0);
 }
 
 .animate-item.scale-up {
-  transform: scale(0.92) translateY(20px);
+  transform: scale(0.92) translate3d(0, 20px, 0);
 }
 .animate-item.scale-up.show {
-  transform: scale(1) translateY(0);
+  transform: scale(1) translate3d(0, 0, 0);
+}
+
+.animate-item.slide-down {
+  transform: translate3d(0, -20px, 0);
+}
+.animate-item.slide-down.show {
+  transform: translate3d(0, 0, 0);
+}
+
+/* Custom transition for groom and bride cards to make their entry ultra-soft and luxury */
+.groom-card.animate-item,
+.bride-card.animate-item {
+  transition: opacity 1.8s cubic-bezier(0.19, 1, 0.22, 1), transform 1.8s cubic-bezier(0.19, 1, 0.22, 1) !important;
 }
 
 /* --- Text Splitting Reveal Animation --- */
@@ -1944,5 +1957,186 @@ body {
 /* Slower transition for Quote Card to make the animation highly visible on scroll */
 .quote-card.animate-item {
   transition: opacity 1.8s cubic-bezier(0.16, 1, 0.3, 1), transform 1.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* --- SECTION 2: MEMPELAI OVAL FRAME STYLES --- */
+#mempelai {
+  position: relative;
+  padding: 60px 24px 120px 24px; /* Bottom padding diperluas ke 120px agar bingkai oval melingkar sempurna di bawah kartu */
+}
+
+#mempelai > *:not(.mempelai-oval-frame) {
+  position: relative;
+  z-index: 1;
+}
+
+.mempelai-oval-frame {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  right: 15px;
+  bottom: 15px;
+  background-image: url('G5.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  border-radius: 180px; /* Long rounded border-radius forming a long oval/cameo shape */
+  border: 2px solid var(--accent-color);
+  box-shadow: 0 10px 30px rgba(27, 67, 50, 0.15), inset 0 0 100px rgba(0, 0, 0, 0.15);
+  z-index: 0;
+  overflow: hidden;
+}
+
+/* Animasi Zoom In untuk Bingkai Oval Mempelai */
+.mempelai-oval-frame.animate-item {
+  opacity: 0;
+  transform: scale(0.85) translate3d(0, 0, 0);
+  transform-origin: center center;
+  transition: opacity 1.8s cubic-bezier(0.16, 1, 0.3, 1), transform 1.8s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  will-change: opacity, transform;
+}
+.mempelai-oval-frame.animate-item.show {
+  opacity: 1;
+  transform: scale(1) translate3d(0, 0, 0);
+}
+
+/* Inner gold line dashed frame */
+.mempelai-oval-frame::before {
+  content: '';
+  position: absolute;
+  top: 6px;
+  left: 6px;
+  right: 6px;
+  bottom: 6px;
+  border: 1px dashed rgba(212, 175, 55, 0.45);
+  border-radius: 174px; /* match relative oval shape */
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* Remove overlay from oval frame to show full G5.jpg background clearly */
+.mempelai-oval-frame::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: none;
+  z-index: 2;
+  pointer-events: none;
+}
+
+/* Adjust size and add drop-shadow for title text readability over the full G5.jpg background */
+#mempelai .section-title {
+  font-size: 1.75rem; /* Ukuran diperkecil agar pas dalam lengkungan oval */
+  color: #1b4332 !important; /* Hijau emerald gelap mewah */
+  text-shadow: 0 0 12px #ffffff, 0 0 6px #ffffff, 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+#mempelai .section-subtitle {
+  font-size: 0.8rem;
+  max-width: 270px; /* Batasi lebar teks agar tidak menabrak bingkai oval */
+  margin-left: auto;
+  margin-right: auto;
+  color: #2d6a4f !important; /* Hijau emerald sedang agar kontras dan senada */
+  text-shadow: 0 0 10px #ffffff, 0 0 5px #ffffff;
+  font-weight: 700;
+}
+
+/* Mempelai Card Refactor - Full Width Rectangular Card-Sized Photos */
+.groom-card, .bride-card {
+  padding: 0 !important;
+  overflow: hidden;
+}
+
+.groom-card .mempelai-photo-wrapper, 
+.bride-card .mempelai-photo-wrapper {
+  width: calc(100% - 32px);
+  height: 280px; /* Tinggi proporsional */
+  margin: 16px auto 0 auto; /* Tengah secara horizontal, margin 16px di atas */
+  border-radius: var(--radius-md); /* Sudut melingkar lembut */
+  padding: 0;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(27, 67, 50, 0.08); /* Border tipis estetik */
+}
+
+.groom-card .mempelai-slideshow,
+.bride-card .mempelai-slideshow {
+  width: 100%;
+  height: 100%;
+  border-radius: var(--radius-md);
+  box-shadow: none;
+}
+
+.groom-card .mempelai-slideshow img,
+.bride-card .mempelai-slideshow img {
+  border-radius: var(--radius-md);
+  object-fit: contain; /* Menampilkan seluruh bagian foto tanpa terpotong */
+  background-color: rgba(27, 67, 50, 0.05); /* Background emerald lembut untuk menyelaraskan area kosong */
+}
+
+/* Sembunyikan garis border melingkar dashed yang berputar */
+.groom-card .photo-border-effect,
+.bride-card .photo-border-effect {
+  display: none;
+}
+
+/* Pembungkus informasi teks dengan padding pasca foto seukuran card */
+.mempelai-details {
+  padding: 24px 20px;
+  text-align: center;
+}
+
+/* Membuat kartu mempelai transparan agar gambar background oval nampak */
+#mempelai .card {
+  background: rgba(253, 251, 247, 0.65) !important; /* Menggunakan cream dengan opacity 0.65 agar lebih hangat dan kontras */
+  border: 1px solid rgba(212, 175, 55, 0.35) !important; /* Border emas tipis mewah */
+  backdrop-filter: blur(24px) !important; /* Blur ditingkatkan ke 24px agar detail foto background tidak mengganggu teks */
+  -webkit-backdrop-filter: blur(24px) !important;
+  box-shadow: 0 10px 35px rgba(27, 67, 50, 0.15) !important;
+}
+
+/* Memperjelas keterbacaan identitas mempelai (teks lebih tebal, warna lebih gelap, dan text-shadow glow putih) */
+#mempelai .mempelai-name {
+  color: #1b4332 !important; /* Hijau emerald gelap mewah */
+  font-size: 1.45rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-shadow: 0 0 8px #ffffff, 0 0 4px #ffffff, 0 1px 2px rgba(0, 0, 0, 0.15);
+}
+
+#mempelai .mempelai-bio {
+  color: #9e7815 !important; /* Emas gelap mewah */
+  font-weight: 700;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 15px;
+  text-shadow: 0 0 8px #ffffff, 0 0 4px #ffffff;
+}
+
+#mempelai .parents-info {
+  border-top: 1px dashed rgba(212, 175, 55, 0.5) !important;
+  margin-top: 15px;
+  padding-top: 15px;
+}
+
+#mempelai .parent-label {
+  color: #2d6a4f !important; /* Hijau sedang untuk pemisah label */
+  font-weight: 700;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+  text-shadow: 0 0 6px #ffffff, 0 0 3px #ffffff;
+}
+
+#mempelai .parent-names {
+  color: #121e18 !important; /* Hitam kehijauan gelap */
+  font-weight: 700;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  text-shadow: 0 0 8px #ffffff, 0 0 4px #ffffff, 0 1px 1px rgba(0, 0, 0, 0.1);
 }
 

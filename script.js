@@ -179,30 +179,61 @@ document.addEventListener('DOMContentLoaded', () => {
   function initAnimations() {
     const animateObserverOptions = {
       root: document.getElementById('mainContent'),
-      threshold: 0.30 // Trigger animation when 30% of the section is visible
+      threshold: 0.12 // Trigger when 12% of the element itself is visible for a highly responsive scroll feel
     };
 
-    const animateObserver = new IntersectionObserver((entries, observer) => {
+    const animateObserver = new IntersectionObserver((entries) => {
+      // Filter entries that are entering the viewport
+      const intersectingEntries = entries.filter(e => e.isIntersecting);
+      
+      // Sort intersecting entries by their document order to ensure consistent top-to-bottom stagger sequence
+      intersectingEntries.sort((a, b) => {
+        return a.target.compareDocumentPosition(b.target) & Node.DOCUMENT_POSITION_FOLLOWING ? -1 : 1;
+      });
+
+      intersectingEntries.forEach((entry, index) => {
+        const item = entry.target;
+        
+        // Stagger delay applies only if multiple elements enter the viewport in the same frame
+        let delay = index * 150; 
+        
+        // Koreografi jeda animasi khusus untuk Section 2
+        if (item.classList.contains('mempelai-oval-frame')) {
+          delay = 0; // Mulai zoom in oval background segera
+        } else if (item.closest('#mempelai') && item.classList.contains('section-title')) {
+          delay = 1000; // Tunggu 1 detik hingga oval cukup besar baru judul memudar masuk
+        } else if (item.closest('#mempelai') && item.classList.contains('section-subtitle')) {
+          delay = 1200; // Tunggu 1.2 detik baru subjudul memudar masuk
+        } else if (item.closest('.groom-card') || item.closest('.bride-card')) {
+          if (item.classList.contains('groom-card') || item.classList.contains('bride-card')) {
+            delay = delay + 1800; // Kartu meluncur setelah jeda 1.8 detik
+          } else {
+            // Teks identitas di dalam kartu (nama, bio, orang tua) muncul melayang satu-satu dari atas ke bawah
+            // Stagger dimulai dari 2400ms setelah scroll menyentuh kartu (sehingga beranimasi saat kartu sedang bergeser)
+            const card = item.closest('.groom-card') || item.closest('.bride-card');
+            const innerItems = Array.from(card.querySelectorAll('.animate-item:not(.groom-card):not(.bride-card)'));
+            const innerIndex = innerItems.indexOf(item);
+            delay = 2400 + (innerIndex * 200); // Berturut-turut: 2.4s, 2.6s, 2.8s, 3.0s
+          }
+        }
+        
+        item.style.transitionDelay = `${delay}ms`;
+        item.classList.add('show');
+      });
+
+      // Reset when scrolled out of view to make animations repeat dynamically on scroll
       entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          const section = entry.target;
-          const animItems = section.querySelectorAll('.animate-item');
-          animItems.forEach((item, index) => {
-            let delay = index * 250; // Snappier stagger for cards and inner content
-            // Group gallery items with a quick stagger after heading/subheading reveal
-            if (item.classList.contains('gallery-item')) {
-              delay = 400 + (index - 2) * 60;
-            }
-            item.style.transitionDelay = `${delay}ms`;
-            item.classList.add('show');
-          });
-          observer.unobserve(section);
+        if (!entry.isIntersecting) {
+          const item = entry.target;
+          item.style.transitionDelay = '0ms';
+          item.classList.remove('show');
         }
       });
     }, animateObserverOptions);
 
-    document.querySelectorAll('.section').forEach(section => {
-      animateObserver.observe(section);
+    // Observe each animate-item individually
+    document.querySelectorAll('.animate-item').forEach(item => {
+      animateObserver.observe(item);
     });
   }
 

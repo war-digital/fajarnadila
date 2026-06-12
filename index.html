@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Undangan Pernikahan - Fajar & Nadila</title>
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Great+Vibes&display=swap" rel="stylesheet">
+  
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Custom Styles -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Background Music Player (Hidden initially, will play on Buka Undangan) -->
+  <audio id="bgMusic" loop>
+    <source src="https://archive.org/download/100ClassicalMusicMasterpieces/1698%20Pachelbel%20%2C%20Canon%20in%20D.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
+
+  <!-- Desktop Backdrop Wrapper -->
+  <div class="desktop-wrapper">
+    
+    <!-- Left Column: Desktop Banner (Hidden on mobile) -->
+    <div class="desktop-banner">
+      <div class="banner-content">
+        <span class="wedding-tag">THE WEDDING OF</span>
+        <h1 class="couple-title">Fajar & Nadila</h1>
+        <p class="wedding-date-text">Sabtu, 04 Juli 2026</p>
+        <div class="divider"></div>
+        <p class="desktop-notice">Silakan gunakan perangkat mobile atau lihat panel simulasi Android di sebelah kanan untuk menjelajahi undangan kami.</p>
+        
+        <!-- Desktop Mini Countdown -->
+        <div class="mini-countdown" id="desktopCountdown">
+          <div class="mini-box"><span id="d-days">00</span><p>Hari</p></div>
+          <div class="mini-box"><span id="d-hours">00</span><p>Jam</p></div>
+          <div class="mini-box"><span id="d-minutes">00</span><p>Menit</p></div>
+          <div class="mini-box"><span id="d-seconds">00</span><p>Detik</p></div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Right Column: Android Mockup Wrapper -->
+    <div class="phone-mockup">
+      <!-- Android Frame Details -->
+      <div class="phone-speaker"></div>
+      <div class="phone-camera"></div>
+      <div class="phone-volume-btn"></div>
+      <div class="phone-power-btn"></div>
+      
+      <!-- Android Screen Viewport -->
+      <div class="phone-screen">
+        
+        <!-- Android Status Bar -->
+        <div class="status-bar">
+          <div class="status-time" id="statusTime">12:00</div>
+          <div class="status-icons">
+            <i class="fas fa-wifi"></i>
+            <i class="fas fa-signal"></i>
+            <i class="fas fa-battery-three-quarters"></i>
+          </div>
+        </div>
+        
+        <!-- Floating Music Control -->
+        <button class="music-toggle-btn" id="musicToggleBtn" aria-label="Toggle Music">
+          <i class="fas fa-music animate-pulse"></i>
+        </button>
+
+        <!-- APP CONTAINER -->
+        <div class="app-container" id="appContainer">
+
+          <!-- 1. VIDEO OPENING OVERLAY -->
+          <div class="video-overlay" id="videoOverlay">
+            <video id="openingVideo" playsinline muted autoplay>
+              <source src="VG.mp4" type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+            <!-- Control overlay for video -->
+            <div class="video-controls">
+              <button class="skip-video-btn" id="skipVideoBtn">
+                Lewati Video <i class="fas fa-chevron-right"></i>
+              </button>
+            </div>
+          </div>
+
+          <!-- 2. COVER UNDANGAN SCREEN -->
+          <div class="cover-screen" id="coverScreen">
+            <!-- Background Slideshow -->
+            <div class="bg-slideshow">
+              <img src="BG1.jpg" alt="Background 1" class="active">
+              <img src="BG2.jpg" alt="Background 2">
+              <img src="BG3.jpg" alt="Background 3">
+            </div>
+            
+            <!-- Cover Dark Overlay -->
+            <div class="cover-overlay"></div>
+            
+            <!-- Cover Content -->
+            <div class="cover-content">
+              <div class="cover-top-tag text-fade">THE WEDDING OF</div>
+              <h2 class="cover-couple-name text-fade">Fajar & Nadila</h2>
+              
+              <div class="guest-card-container text-fade">
+                <p class="guest-prefix">Kepada Yth. Bapak/Ibu/Saudara/i:</p>
+                <div class="guest-name" id="guestName">Tamu Undangan</div>
+                <p class="guest-suffix">Kami Mengundang Anda Untuk Hadir Di Acara Kami</p>
+              </div>
+              
+              <button class="open-invitation-btn text-fade" id="openInvitationBtn">
+                <i class="fa-regular fa-envelope-open mr-2"></i> Buka Undangan
+              </button>
+            </div>
+          </div>
+
+          <!-- 3. MAIN INVITATION CONTENT (Scrollable, hidden initially) -->
+          <div class="main-content" id="mainContent">
+            <!-- Global Background fixed image -->
+            <div class="global-bg"></div>
+            <div class="global-overlay"></div>
+            
+            <!-- SECTION 1: INFO UNDANGAN -->
+            <section class="section" id="info">
+              <div class="card-wrapper">
+                <div class="card-shadow-bg" style="background-image: url('G3.jpg');"></div>
+                <div class="card glassmorphism">
+                  <div class="section-badge">Selamat Datang</div>
+                  <h3 class="section-title">Walimatul 'Ursy</h3>
+                  <p class="invited-text">You are invited to the wedding of</p>
+                  
+                  <h2 class="couple-names-elegant">Fajar & Nadila</h2>
+                  
+                  <div class="wedding-date-badge">
+                    <i class="fa-regular fa-calendar-days"></i>
+                    <span>Kamis, 04 Juli 2026</span>
+                  </div>
+                  
+                  <div class="countdown-container">
+                    <p class="countdown-title">Hari Bahagia Kami Akan Tiba</p>
+                    <div class="countdown-timer" id="mainCountdown">
+                      <div class="countdown-box">
+                        <span class="countdown-num" id="days">00</span>
+                        <span class="countdown-label">Hari</span>
+                      </div>
+                      <div class="countdown-box">
+                        <span class="countdown-num" id="hours">00</span>
+                        <span class="countdown-label">Jam</span>
+                      </div>
+                      <div class="countdown-box">
+                        <span class="countdown-num" id="minutes">00</span>
+                        <span class="countdown-label">Menit</span>
+                      </div>
+                      <div class="countdown-box">
+                        <span class="countdown-num" id="seconds">00</span>
+                        <span class="countdown-label">Detik</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <!-- SECTION 2: IDENTITAS MEMPELAI -->
+            <section class="section" id="mempelai">
+              <div class="section-title-wrapper">
+                <h3 class="section-title">Kedua Mempelai</h3>
+                <p class="section-subtitle">Maha suci Allah yang telah menciptakan makhluk-Nya berpasang-pasangan.</p>
+              </div>
+
+              <!-- Groom (Pria) -->
+              <div class="card glassmorphism groom-card">
+                <div class="mempelai-photo-wrapper">
+                  <div class="mempelai-slideshow">
+                    <img src="GROOM1.jpg" alt="Al Fajar Nur" class="groom-photo active">
+                    <img src="GROOM2.jpg" alt="Al Fajar Nur" class="groom-photo">
+                  </div>
+                  <div class="photo-border-effect"></div>
+                </div>
+                <h4 class="mempelai-name">Al Fajar Nur, S.I.P.</h4>
+                <p class="mempelai-bio">Anak bungsu dari 3 bersaudara</p>
+                <div class="parents-info">
+                  <p class="parent-label">Putra Tercinta dari:</p>
+                  <p class="parent-names">Bapak Hi. Muhammad<br>& Ibu Hj. Sitti</p>
+                </div>
+              </div>
+
+              <!-- Love Heart divider -->
+              <div class="mempelai-divider">
+                <i class="fa-solid fa-heart animate-pulse"></i>
+              </div>
+
+              <!-- Bride (Wanita) -->
+              <div class="card glassmorphism bride-card">
+                <div class="mempelai-photo-wrapper">
+                  <div class="mempelai-slideshow">
+                    <img src="BRIDE1.jpg" alt="Nadila Eka Wahyuni" class="bride-photo active">
+                    <img src="BRIDE2.jpg" alt="Nadila Eka Wahyuni" class="bride-photo">
+                  </div>
+                  <div class="photo-border-effect"></div>
+                </div>
+                <h4 class="mempelai-name">Apt. Nadila Eka Wahyuni, S.Farm.</h4>
+                <p class="mempelai-bio">Anak pertama dari 4 bersaudara</p>
+                <div class="parents-info">
+                  <p class="parent-label">Putri Tercinta dari:</p>
+                  <p class="parent-names">Bapak Hi. Abdul Azis<br>& Ibu Hj. Asniati</p>
+                </div>
+              </div>
+            </section>
+
+            <!-- SECTION 3: RANGKAIAN ACARA -->
+            <section class="section" id="acara">
+              <div class="section-title-wrapper">
+                <h3 class="section-title">Rangkaian Acara</h3>
+                <p class="section-subtitle">Dengan memohon rahmat dan ridho Allah SWT, kami mengundang Anda untuk menghadiri:</p>
+              </div>
+
+              <div class="card glassmorphism event-card">
+                <div class="event-image-wrapper">
+                  <img src="G12.jpg" alt="Resepsi Fajar & Nadila" class="event-image">
+                  <div class="event-tag">RESEPSI</div>
+                </div>
+                <div class="event-details">
+                  <div class="event-item">
+                    <i class="fa-regular fa-calendar-check"></i>
+                    <div>
+                      <h5>Hari & Tanggal</h5>
+                      <p>Sabtu, 04 Juli 2026</p>
+                    </div>
+                  </div>
+                  <div class="event-item">
+                    <i class="fa-regular fa-clock"></i>
+                    <div>
+                      <h5>Waktu Acara</h5>
+                      <p>11:00 WITA - Selesai</p>
+                    </div>
+                  </div>
+                  <div class="event-item">
+                    <i class="fa-solid fa-location-dot"></i>
+                    <div>
+                      <h5>Lokasi Acara</h5>
+                      <p class="address-text">Jl Raja Alam No 35 Desa Bangkir</p>
+                    </div>
+                  </div>
+                  
+                  <a href="https://maps.google.com/?q=Jl+Raja+Alam+No+35+Desa+Bangkir" target="_blank" class="maps-btn">
+                    <i class="fa-solid fa-map-location-dot"></i> Petunjuk Arah Google Maps
+                  </a>
+                </div>
+              </div>
+            </section>
+
+            <!-- SECTION 4: KISAH PERTEMUAN -->
+            <section class="section" id="kisah">
+              <div class="section-title-wrapper">
+                <h3 class="section-title">Kisah Pertemuan</h3>
+                <p class="section-subtitle">Bagaimana takdir mempertemukan kami dalam satu ikatan cinta.</p>
+              </div>
+
+              <div class="timeline">
+                
+                <!-- Story 1: Awal Pertemuan -->
+                <div class="timeline-item">
+                  <div class="timeline-badge"><i class="fa-solid fa-heart"></i></div>
+                  <div class="timeline-card glassmorphism">
+                    <div class="timeline-img-container">
+                      <img src="G9.jpg" alt="Awal Pertemuan">
+                    </div>
+                    <h4 class="timeline-title">Awal Pertemuan</h4>
+                    <p class="timeline-desc">Perjalanan cinta kami berawal dari pertemuan yang tak disengaja. Lewat obrolan sederhana dan kecocokan yang perlahan tumbuh, kami menyadari bahwa kehadiran satu sama lain memberi kenyamanan dan makna baru dalam kehidupan kami.</p>
+                  </div>
+                </div>
+
+                <!-- Story 2: Lamaran -->
+                <div class="timeline-item">
+                  <div class="timeline-badge"><i class="fa-solid fa-ring"></i></div>
+                  <div class="timeline-card glassmorphism">
+                    <div class="timeline-img-container">
+                      <img src="G10.jpg" alt="Lamaran">
+                    </div>
+                    <h4 class="timeline-title">Lamaran (Engagement)</h4>
+                    <p class="timeline-desc">Setelah melewati berbagai proses pengenalan dan keyakinan hati yang matang, kami memutuskan untuk melangkah ke jenjang yang lebih serius. Dihadapan keluarga besar, janji suci untuk saling menjaga diikrarkan dalam sebuah acara lamaran yang khidmat.</p>
+                  </div>
+                </div>
+
+                <!-- Story 3: Menikah -->
+                <div class="timeline-item">
+                  <div class="timeline-badge"><i class="fa-solid fa-handshake-angle"></i></div>
+                  <div class="timeline-card glassmorphism">
+                    <div class="timeline-img-container">
+                      <img src="G8.jpg" alt="Menikah">
+                    </div>
+                    <h4 class="timeline-title">Menikah</h4>
+                    <p class="timeline-desc">Dan kini, kami akan menyatukan janji suci dalam ikatan pernikahan yang sah di mata agama dan negara. Menjadi awal lembaran baru bagi kami berdua untuk mengarungi bahtera rumah tangga bersama selamanya.</p>
+                  </div>
+                </div>
+
+              </div>
+            </section>
+
+            <!-- SECTION 5: GALLERY FOTO -->
+            <section class="section" id="galeri">
+              <div class="section-title-wrapper">
+                <h3 class="section-title">Galeri Kebahagiaan</h3>
+                <p class="section-subtitle">Momen-momen indah kebersamaan kami yang terekam dalam lensa.</p>
+              </div>
+
+              <div class="gallery-grid" id="galleryGrid">
+                <!-- Gallery items will be populated statically, showing all G images + photos -->
+                <div class="gallery-item"><img src="G1.jpg" alt="Momen Indah 1" loading="lazy"></div>
+                <div class="gallery-item"><img src="G2.jpg" alt="Momen Indah 2" loading="lazy"></div>
+                <div class="gallery-item"><img src="G3.jpg" alt="Momen Indah 3" loading="lazy"></div>
+                <div class="gallery-item"><img src="G4.jpg" alt="Momen Indah 4" loading="lazy"></div>
+                <div class="gallery-item"><img src="G5.jpg" alt="Momen Indah 5" loading="lazy"></div>
+                <div class="gallery-item"><img src="G6.jpg" alt="Momen Indah 6" loading="lazy"></div>
+                <div class="gallery-item"><img src="G7.jpg" alt="Momen Indah 7" loading="lazy"></div>
+                <div class="gallery-item"><img src="G8.jpg" alt="Momen Indah 8" loading="lazy"></div>
+                <div class="gallery-item"><img src="G9.jpg" alt="Momen Indah 9" loading="lazy"></div>
+                <div class="gallery-item"><img src="G10.jpg" alt="Momen Indah 10" loading="lazy"></div>
+                <div class="gallery-item"><img src="G11.jpg" alt="Momen Indah 11" loading="lazy"></div>
+                <div class="gallery-item"><img src="G12.jpg" alt="Momen Indah 12" loading="lazy"></div>
+                <div class="gallery-item"><img src="G13.jpg" alt="Momen Indah 13" loading="lazy"></div>
+                <div class="gallery-item"><img src="G14.jpg" alt="Momen Indah 14" loading="lazy"></div>
+                <div class="gallery-item"><img src="photo_2026-06-12_20-36-25.jpg" alt="Momen Indah 15" loading="lazy"></div>
+                <div class="gallery-item"><img src="photo_2026-06-12_20-36-28.jpg" alt="Momen Indah 16" loading="lazy"></div>
+              </div>
+            </section>
+
+            <!-- SECTION 6: WEDDING GIFT -->
+            <section class="section" id="kado">
+              <div class="section-title-wrapper">
+                <h3 class="section-title">Kado Pernikahan</h3>
+                <p class="section-subtitle">Doa restu Anda merupakan karunia terindah bagi kami. Namun jika Anda ingin memberikan tanda kasih, Anda dapat mengirimkannya melalui:</p>
+              </div>
+
+              <div class="card glassmorphism gift-card">
+                <div class="gift-icon"><i class="fa-solid fa-gift"></i></div>
+                
+                <!-- Gift Account 1 -->
+                <div class="bank-account-box">
+                  <div class="bank-name">BANK MANDIRI</div>
+                  <div class="account-number" id="accMandiri">1234567890</div>
+                  <div class="account-holder">a.n Al Fajar Nur</div>
+                  <button class="copy-btn" onclick="copyText('accMandiri', this)">
+                    <i class="fa-regular fa-copy"></i> Salin Rekening
+                  </button>
+                </div>
+
+                <!-- Gift Account 2 -->
+                <div class="bank-account-box">
+                  <div class="bank-name">BANK BCA</div>
+                  <div class="account-number" id="accBCA">9876543210</div>
+                  <div class="account-holder">a.n Nadila Eka Wahyuni</div>
+                  <button class="copy-btn" onclick="copyText('accBCA', this)">
+                    <i class="fa-regular fa-copy"></i> Salin Rekening
+                  </button>
+                </div>
+
+                <!-- Shipping Address -->
+                <div class="shipping-box">
+                  <div class="shipping-title"><i class="fa-solid fa-truck-ramp-box"></i> Kirim Kado Fisik</div>
+                  <p class="shipping-address" id="shipAddress">Jl Raja Alam No 35 Desa Bangkir, Kec. Dampal Selatan, Kabupaten Toli-Toli, Sulawesi Tengah 94352</p>
+                  <button class="copy-btn" onclick="copyText('shipAddress', this)">
+                    <i class="fa-regular fa-copy"></i> Salin Alamat
+                  </button>
+                </div>
+              </div>
+            </section>
+
+            <!-- SECTION 7: KIRIM UCAPAN -->
+            <section class="section" id="ucapan">
+              <div class="section-title-wrapper">
+                <h3 class="section-title">Kirim Ucapan & Doa</h3>
+                <p class="section-subtitle">Berikan doa restu dan ucapan hangat Anda untuk kebahagiaan kami.</p>
+              </div>
+
+              <div class="card glassmorphism rsvp-card">
+                <form id="rsvpForm">
+                  <div class="form-group">
+                    <label for="rsvpName"><i class="fa-regular fa-user"></i> Nama Lengkap</label>
+                    <input type="text" id="rsvpName" placeholder="Masukkan nama Anda..." required>
+                  </div>
+                  
+                  <div class="form-group">
+                    <label for="rsvpMessage"><i class="fa-regular fa-comment-dots"></i> Ucapan / Doa Restu</label>
+                    <textarea id="rsvpMessage" rows="4" placeholder="Tulis ucapan & doa restu di sini..." required></textarea>
+                  </div>
+                  
+                  <div class="form-group">
+                    <label><i class="fa-regular fa-circle-question"></i> Konfirmasi Kehadiran</label>
+                    <div class="attendance-options">
+                      <label class="attendance-label">
+                        <input type="radio" name="attendance" value="Hadir" checked>
+                        <span>Hadir</span>
+                      </label>
+                      <label class="attendance-label">
+                        <input type="radio" name="attendance" value="Tidak Hadir">
+                        <span>Tidak Hadir</span>
+                      </label>
+                      <label class="attendance-label">
+                        <input type="radio" name="attendance" value="Ragu-ragu">
+                        <span>Ragu-ragu</span>
+                      </label>
+                    </div>
+                  </div>
+
+                  <button type="submit" class="submit-wishes-btn">
+                    Kirim Ucapan <i class="fa-regular fa-paper-plane"></i>
+                  </button>
+                </form>
+
+                <!-- Guestbook List -->
+                <div class="guestbook-container">
+                  <h4 class="guestbook-title"><i class="fa-solid fa-comments"></i> Ucapan & Doa (<span id="wishesCount">0</span>)</h4>
+                  <div class="guestbook-list" id="wishesList">
+                    <!-- Wishes list will be populated dynamically from JS -->
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <!-- SECTION 8: UCAPAN TERIMAKASIH -->
+            <section class="section" id="terimakasih">
+              <div class="card glassmorphism thank-you-card">
+                <div class="thank-you-heart"><i class="fa-solid fa-heart animate-pulse"></i></div>
+                <h3 class="thank-you-title">Terima Kasih</h3>
+                <p class="thank-you-text">Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir dan memberikan doa restu untuk pernikahan kami.</p>
+                <p class="thank-you-closing">Kami yang berbahagia,</p>
+                <h2 class="couple-closing-name">Fajar & Nadila</h2>
+                <p class="family-closing-names">Keluarga Bapak Hi. Muhammad & Ibu Hj. Sitti<br>Keluarga Bapak Hi. Abdul Azis & Ibu Hj. Asniati</p>
+              </div>
+            </section>
+
+            <!-- Bottom Spacer for Tab Bar -->
+            <div class="bottom-spacer"></div>
+
+          </div>
+
+          <!-- Bottom Navigation Bar for Mobile Look -->
+          <div class="bottom-nav" id="bottomNav">
+            <a href="#info" class="nav-item active" data-section="info">
+              <i class="fa-solid fa-house"></i>
+              <span>Info</span>
+            </a>
+            <a href="#mempelai" class="nav-item" data-section="mempelai">
+              <i class="fa-solid fa-user-friends"></i>
+              <span>Mempelai</span>
+            </a>
+            <a href="#acara" class="nav-item" data-section="acara">
+              <i class="fa-solid fa-calendar-day"></i>
+              <span>Acara</span>
+            </a>
+            <a href="#kisah" class="nav-item" data-section="kisah">
+              <i class="fa-solid fa-book-open"></i>
+              <span>Cerita</span>
+            </a>
+            <a href="#galeri" class="nav-item" data-section="galeri">
+              <i class="fa-solid fa-images"></i>
+              <span>Galeri</span>
+            </a>
+            <a href="#kado" class="nav-item" data-section="kado">
+              <i class="fa-solid fa-gift"></i>
+              <span>Kado</span>
+            </a>
+          </div>
+
+        </div>
+
+      </div>
+      <!-- Android Bottom Chin Navigation Buttons Mockup -->
+      <div class="phone-home-bar"></div>
+    </div>
+
+  </div>
+
+  <!-- LIGHTBOX MODAL FOR GALLERY -->
+  <div class="lightbox-modal" id="lightboxModal">
+    <span class="lightbox-close" id="lightboxClose">&times;</span>
+    <button class="lightbox-prev" id="lightboxPrev"><i class="fas fa-chevron-left"></i></button>
+    <img class="lightbox-content" id="lightboxImg" src="" alt="Lightbox view">
+    <button class="lightbox-next" id="lightboxNext"><i class="fas fa-chevron-right"></i></button>
+    <div class="lightbox-caption" id="lightboxCaption"></div>
+  </div>
+
+  <!-- Toast Notification for copying text -->
+  <div class="toast" id="toast">Berhasil disalin!</div>
+
+  <!-- Custom Scripts -->
+  <script src="script.js"></script>
+</body>
+</html>

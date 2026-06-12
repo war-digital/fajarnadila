@@ -1827,3 +1827,122 @@ body {
   display: none;
 }
 
+/* --- SECTION 1.5: QUOTE AR-RUM STYLES & BINGKAI ESTETIK --- */
+.quote-card {
+  position: relative;
+  padding: 45px 32px;
+  background: rgba(255, 255, 255, 0.7);
+  border-radius: var(--radius-lg);
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  box-shadow: var(--shadow-premium);
+  text-align: center;
+  overflow: hidden;
+}
+
+/* Bingkai Estetik dengan Sudut Emas */
+.quote-card .decorative-border {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  right: 15px;
+  bottom: 15px;
+  border: 1px dashed var(--accent-color);
+  border-radius: calc(var(--radius-lg) - 10px);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.quote-card .decorative-border::before {
+  content: '';
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  right: 4px;
+  bottom: 4px;
+  border: 1px solid rgba(27, 67, 50, 0.12);
+  border-radius: calc(var(--radius-lg) - 14px);
+}
+
+/* L-Shaped Corner Ornaments menggunakan Clip-path */
+.quote-card .decorative-border::after {
+  content: '';
+  position: absolute;
+  top: -8px;
+  left: -8px;
+  right: -8px;
+  bottom: -8px;
+  border: 2px solid var(--accent-gold-dark);
+  pointer-events: none;
+  clip-path: polygon(
+    /* Top Left Corner */
+    0 0, 16px 0, 16px 2px, 2px 2px, 2px 16px, 0 16px,
+    /* Top Right Corner */
+    100% 0, 100% 16px, calc(100% - 2px) 16px, calc(100% - 2px) 2px, calc(100% - 16px) 2px, calc(100% - 16px) 0,
+    /* Bottom Right Corner */
+    100% 100%, calc(100% - 16px) 100%, calc(100% - 16px) calc(100% - 2px), calc(100% - 2px) calc(100% - 2px), calc(100% - 2px) calc(100% - 16px), 100% calc(100% - 16px),
+    /* Bottom Left Corner */
+    0 100%, 0 calc(100% - 16px), 2px calc(100% - 16px), 2px calc(100% - 2px), 16px calc(100% - 2px), 16px 100%
+  );
+}
+
+.quote-icon {
+  font-size: 1.6rem;
+  color: var(--accent-gold-dark);
+  margin-bottom: 12px;
+}
+
+.quote-arabic {
+  font-family: var(--font-serif);
+  font-size: 1.15rem;
+  line-height: 2.2;
+  color: var(--primary-color);
+  direction: rtl;
+  text-align: center;
+  margin: 15px 0;
+  font-weight: 700;
+  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.8);
+}
+
+.quote-divider {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--accent-color);
+  margin: 15px 0;
+}
+.quote-divider i {
+  font-size: 0.75rem;
+}
+
+.quote-translation {
+  font-family: var(--font-sans);
+  font-size: 0.8rem;
+  line-height: 1.6;
+  color: var(--text-dark);
+  font-style: italic;
+  margin-bottom: 15px;
+  padding: 0 10px;
+}
+
+.quote-source {
+  font-family: var(--font-sans);
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: var(--accent-gold-dark);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+/* Custom slide-up animation class */
+.animate-item.slide-up {
+  transform: translateY(80px);
+}
+.animate-item.slide-up.show {
+  transform: translateY(0);
+}
+
+/* Slower transition for Quote Card to make the animation highly visible on scroll */
+.quote-card.animate-item {
+  transition: opacity 1.8s cubic-bezier(0.16, 1, 0.3, 1), transform 1.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+

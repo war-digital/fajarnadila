@@ -179,7 +179,7 @@ document.addEventListener('DOMContentLoaded', () => {
   function initAnimations() {
     const animateObserverOptions = {
       root: document.getElementById('mainContent'),
-      threshold: 0.05
+      threshold: 0.30 // Trigger animation when 30% of the section is visible
     };
 
     const animateObserver = new IntersectionObserver((entries, observer) => {
@@ -188,10 +188,10 @@ document.addEventListener('DOMContentLoaded', () => {
           const section = entry.target;
           const animItems = section.querySelectorAll('.animate-item');
           animItems.forEach((item, index) => {
-            let delay = index * 450; // Slowly stagger items one-by-one
+            let delay = index * 250; // Snappier stagger for cards and inner content
             // Group gallery items with a quick stagger after heading/subheading reveal
             if (item.classList.contains('gallery-item')) {
-              delay = 600 + (index - 2) * 80;
+              delay = 400 + (index - 2) * 60;
             }
             item.style.transitionDelay = `${delay}ms`;
             item.classList.add('show');

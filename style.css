@@ -556,12 +556,14 @@ body {
   top: 0;
   left: 0;
   width: 100%;
-  height: 100%;
+  height: calc(100% + 60px); /* Extra height for smooth parallax movement */
   background-image: url('BG.jpg');
   background-size: cover;
   background-position: center;
   z-index: -2;
   pointer-events: none;
+  transform: translate3d(0, 0, 0);
+  will-change: transform;
 }
 .global-overlay {
   position: fixed;
@@ -1627,3 +1629,175 @@ body {
     height: calc(64px + env(safe-area-inset-bottom, 0px));
   }
 }
+
+/* --- Staggered Scroll Animation System --- */
+.animate-item {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1), transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+.animate-item.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Directional and Scale Variants */
+.animate-item.slide-left {
+  transform: translateX(-40px);
+}
+.animate-item.slide-left.show {
+  transform: translateX(0);
+}
+
+.animate-item.slide-right {
+  transform: translateX(40px);
+}
+.animate-item.slide-right.show {
+  transform: translateX(0);
+}
+
+.animate-item.scale-up {
+  transform: scale(0.92) translateY(20px);
+}
+.animate-item.scale-up.show {
+  transform: scale(1) translateY(0);
+}
+
+/* --- Text Splitting Reveal Animation --- */
+.split-chars, .split-words {
+  opacity: 1 !important; /* The container itself should remain visible */
+  transform: none !important; /* The container itself doesn't translate */
+}
+
+.char-item {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(120%) rotate(12deg);
+  transition: transform 0.9s cubic-bezier(0.175, 0.885, 0.32, 1.15), opacity 0.7s ease;
+  transition-delay: calc(var(--char-index) * 45ms);
+  transform-origin: bottom center;
+  will-change: transform, opacity;
+}
+
+.animate-item.show .char-item {
+  opacity: 1;
+  transform: translateY(0) rotate(0deg);
+}
+
+.word-item {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: transform 1.1s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.9s ease;
+  transition-delay: calc(var(--word-index) * 85ms);
+  will-change: transform, opacity;
+}
+
+.animate-item.show .word-item {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Custom Image Card Background Override for Info Section */
+.card.card-image-bg {
+  background: transparent;
+  color: var(--text-white);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  overflow: hidden;
+}
+
+/* Card Background Slideshow System */
+.card-bg-slideshow {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.card-bg-slideshow-track {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 300%;
+  height: 100%;
+  display: flex;
+  transform: translate3d(0, 0, 0);
+  transition: transform 1.5s cubic-bezier(0.85, 0, 0.15, 1);
+  will-change: transform;
+}
+
+.card-bg-slideshow-track img {
+  width: 33.333%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 25%;
+}
+
+.card.card-image-bg::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to bottom, rgba(27, 67, 50, 0.85) 0%, rgba(27, 67, 50, 0.6) 50%, rgba(27, 67, 50, 0.9) 100%);
+  z-index: 2;
+}
+
+.card.card-image-bg > * {
+  position: relative;
+  z-index: 3;
+}
+.card.card-image-bg > .card-bg-slideshow {
+  position: absolute;
+  z-index: 1;
+}
+.card.card-image-bg .section-badge {
+  color: var(--accent-color);
+  text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+.card.card-image-bg .section-title {
+  color: var(--text-white);
+  text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+}
+.card.card-image-bg .invited-text {
+  color: rgba(255, 255, 255, 0.85);
+  text-shadow: 0 1px 3px rgba(0,0,0,0.3);
+}
+.card.card-image-bg .couple-names-elegant {
+  color: var(--accent-color);
+  text-shadow: 0 3px 8px rgba(0,0,0,0.4);
+}
+.card.card-image-bg .wedding-date-badge {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.25);
+  color: var(--text-white);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+.card.card-image-bg .wedding-date-badge i {
+  color: var(--accent-color);
+}
+.card.card-image-bg .countdown-title {
+  color: rgba(255, 255, 255, 0.9);
+  text-shadow: 0 1px 3px rgba(0,0,0,0.3);
+}
+.card.card-image-bg .countdown-box {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: var(--text-white);
+}
+.card.card-image-bg .countdown-num {
+  color: var(--accent-color);
+  text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+.card.card-image-bg .countdown-label {
+  color: rgba(255, 255, 255, 0.8);
+}
+

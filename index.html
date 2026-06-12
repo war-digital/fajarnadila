@@ -127,20 +127,28 @@
             <!-- SECTION 1: INFO UNDANGAN -->
             <section class="section" id="info">
               <div class="card-wrapper">
-                <div class="card-shadow-bg" style="background-image: url('G3.jpg');"></div>
-                <div class="card glassmorphism">
-                  <div class="section-badge">Selamat Datang</div>
-                  <h3 class="section-title">Walimatul 'Ursy</h3>
-                  <p class="invited-text">You are invited to the wedding of</p>
+              <div class="card-shadow-bg" style="background-image: url('G3.jpg');"></div>
+              <div class="card glassmorphism card-image-bg">
+                <!-- Card Background Slideshow (Horizontal Slide) -->
+                <div class="card-bg-slideshow">
+                  <div class="card-bg-slideshow-track" id="cardSlideshowTrack">
+                    <img src="G1.jpg" alt="Info Background 1">
+                    <img src="G2.jpg" alt="Info Background 2">
+                    <img src="G4.jpg" alt="Info Background 3">
+                  </div>
+                </div>
+                <div class="section-badge animate-item split-words">Selamat Datang</div>
+                  <h3 class="section-title animate-item split-chars">Walimatul 'Ursy</h3>
+                  <p class="invited-text animate-item split-words">You are invited to the wedding of</p>
                   
-                  <h2 class="couple-names-elegant">Fajar & Nadila</h2>
+                  <h2 class="couple-names-elegant animate-item split-words">Fajar & Nadila</h2>
                   
-                  <div class="wedding-date-badge">
+                  <div class="wedding-date-badge animate-item">
                     <i class="fa-regular fa-calendar-days"></i>
                     <span>Kamis, 04 Juli 2026</span>
                   </div>
                   
-                  <div class="countdown-container">
+                  <div class="countdown-container animate-item scale-up">
                     <p class="countdown-title">Hari Bahagia Kami Akan Tiba</p>
                     <div class="countdown-timer" id="mainCountdown">
                       <div class="countdown-box">
@@ -168,12 +176,12 @@
             <!-- SECTION 2: IDENTITAS MEMPELAI -->
             <section class="section" id="mempelai">
               <div class="section-title-wrapper">
-                <h3 class="section-title">Kedua Mempelai</h3>
-                <p class="section-subtitle">Maha suci Allah yang telah menciptakan makhluk-Nya berpasang-pasangan.</p>
+                <h3 class="section-title animate-item split-chars">Kedua Mempelai</h3>
+                <p class="section-subtitle animate-item split-words">Maha suci Allah yang telah menciptakan makhluk-Nya berpasang-pasangan.</p>
               </div>
 
               <!-- Groom (Pria) -->
-              <div class="card glassmorphism groom-card">
+              <div class="card glassmorphism groom-card animate-item slide-left">
                 <div class="mempelai-photo-wrapper">
                   <div class="mempelai-slideshow">
                     <img src="GROOM1.jpg" alt="Al Fajar Nur" class="groom-photo active">
@@ -190,12 +198,12 @@
               </div>
 
               <!-- Love Heart divider -->
-              <div class="mempelai-divider">
+              <div class="mempelai-divider animate-item scale-up">
                 <i class="fa-solid fa-heart animate-pulse"></i>
               </div>
 
               <!-- Bride (Wanita) -->
-              <div class="card glassmorphism bride-card">
+              <div class="card glassmorphism bride-card animate-item slide-right">
                 <div class="mempelai-photo-wrapper">
                   <div class="mempelai-slideshow">
                     <img src="BRIDE1.jpg" alt="Nadila Eka Wahyuni" class="bride-photo active">
@@ -215,11 +223,11 @@
             <!-- SECTION 3: RANGKAIAN ACARA -->
             <section class="section" id="acara">
               <div class="section-title-wrapper">
-                <h3 class="section-title">Rangkaian Acara</h3>
-                <p class="section-subtitle">Dengan memohon rahmat dan ridho Allah SWT, kami mengundang Anda untuk menghadiri:</p>
+                <h3 class="section-title animate-item split-chars">Rangkaian Acara</h3>
+                <p class="section-subtitle animate-item split-words">Dengan memohon rahmat dan ridho Allah SWT, kami mengundang Anda untuk menghadiri:</p>
               </div>
 
-              <div class="card glassmorphism event-card">
+              <div class="card glassmorphism event-card animate-item scale-up">
                 <div class="event-image-wrapper">
                   <img src="G12.jpg" alt="Resepsi Fajar & Nadila" class="event-image">
                   <div class="event-tag">RESEPSI</div>
@@ -257,14 +265,14 @@
             <!-- SECTION 4: KISAH PERTEMUAN -->
             <section class="section" id="kisah">
               <div class="section-title-wrapper">
-                <h3 class="section-title">Kisah Pertemuan</h3>
-                <p class="section-subtitle">Bagaimana takdir mempertemukan kami dalam satu ikatan cinta.</p>
+                <h3 class="section-title animate-item split-chars">Kisah Pertemuan</h3>
+                <p class="section-subtitle animate-item split-words">Bagaimana takdir mempertemukan kami dalam satu ikatan cinta.</p>
               </div>
 
               <div class="timeline">
                 
                 <!-- Story 1: Awal Pertemuan -->
-                <div class="timeline-item">
+                <div class="timeline-item animate-item slide-right">
                   <div class="timeline-badge"><i class="fa-solid fa-heart"></i></div>
                   <div class="timeline-card glassmorphism">
                     <div class="timeline-img-container">
@@ -276,7 +284,7 @@
                 </div>
 
                 <!-- Story 2: Lamaran -->
-                <div class="timeline-item">
+                <div class="timeline-item animate-item slide-right">
                   <div class="timeline-badge"><i class="fa-solid fa-ring"></i></div>
                   <div class="timeline-card glassmorphism">
                     <div class="timeline-img-container">
@@ -288,7 +296,7 @@
                 </div>
 
                 <!-- Story 3: Menikah -->
-                <div class="timeline-item">
+                <div class="timeline-item animate-item slide-right">
                   <div class="timeline-badge"><i class="fa-solid fa-handshake-angle"></i></div>
                   <div class="timeline-card glassmorphism">
                     <div class="timeline-img-container">
@@ -305,43 +313,43 @@
             <!-- SECTION 5: GALLERY FOTO -->
             <section class="section" id="galeri">
               <div class="section-title-wrapper">
-                <h3 class="section-title">Galeri Kebahagiaan</h3>
-                <p class="section-subtitle">Momen-momen indah kebersamaan kami yang terekam dalam lensa.</p>
+                <h3 class="section-title animate-item split-chars">Galeri Kebahagiaan</h3>
+                <p class="section-subtitle animate-item split-words">Momen-momen indah kebersamaan kami yang terekam dalam lensa.</p>
               </div>
 
               <div class="gallery-grid" id="galleryGrid">
                 <!-- Gallery items will be populated statically, showing all G images + photos -->
-                <div class="gallery-item"><img src="G1.jpg" alt="Momen Indah 1" loading="lazy"></div>
-                <div class="gallery-item"><img src="G2.jpg" alt="Momen Indah 2" loading="lazy"></div>
-                <div class="gallery-item"><img src="G3.jpg" alt="Momen Indah 3" loading="lazy"></div>
-                <div class="gallery-item"><img src="G4.jpg" alt="Momen Indah 4" loading="lazy"></div>
-                <div class="gallery-item"><img src="G5.jpg" alt="Momen Indah 5" loading="lazy"></div>
-                <div class="gallery-item"><img src="G6.jpg" alt="Momen Indah 6" loading="lazy"></div>
-                <div class="gallery-item"><img src="G7.jpg" alt="Momen Indah 7" loading="lazy"></div>
-                <div class="gallery-item"><img src="G8.jpg" alt="Momen Indah 8" loading="lazy"></div>
-                <div class="gallery-item"><img src="G9.jpg" alt="Momen Indah 9" loading="lazy"></div>
-                <div class="gallery-item"><img src="G10.jpg" alt="Momen Indah 10" loading="lazy"></div>
-                <div class="gallery-item"><img src="G11.jpg" alt="Momen Indah 11" loading="lazy"></div>
-                <div class="gallery-item"><img src="G12.jpg" alt="Momen Indah 12" loading="lazy"></div>
-                <div class="gallery-item"><img src="G13.jpg" alt="Momen Indah 13" loading="lazy"></div>
-                <div class="gallery-item"><img src="G14.jpg" alt="Momen Indah 14" loading="lazy"></div>
-                <div class="gallery-item"><img src="photo_2026-06-12_20-36-25.jpg" alt="Momen Indah 15" loading="lazy"></div>
-                <div class="gallery-item"><img src="photo_2026-06-12_20-36-28.jpg" alt="Momen Indah 16" loading="lazy"></div>
+                <div class="gallery-item animate-item scale-up"><img src="G1.jpg" alt="Momen Indah 1" loading="lazy"></div>
+                <div class="gallery-item animate-item scale-up"><img src="G2.jpg" alt="Momen Indah 2" loading="lazy"></div>
+                <div class="gallery-item animate-item scale-up"><img src="G3.jpg" alt="Momen Indah 3" loading="lazy"></div>
+                <div class="gallery-item animate-item scale-up"><img src="G4.jpg" alt="Momen Indah 4" loading="lazy"></div>
+                <div class="gallery-item animate-item scale-up"><img src="G5.jpg" alt="Momen Indah 5" loading="lazy"></div>
+                <div class="gallery-item animate-item scale-up"><img src="G6.jpg" alt="Momen Indah 6" loading="lazy"></div>
+                <div class="gallery-item animate-item scale-up"><img src="G7.jpg" alt="Momen Indah 7" loading="lazy"></div>
+                <div class="gallery-item animate-item scale-up"><img src="G8.jpg" alt="Momen Indah 8" loading="lazy"></div>
+                <div class="gallery-item animate-item scale-up"><img src="G9.jpg" alt="Momen Indah 9" loading="lazy"></div>
+                <div class="gallery-item animate-item scale-up"><img src="G10.jpg" alt="Momen Indah 10" loading="lazy"></div>
+                <div class="gallery-item animate-item scale-up"><img src="G11.jpg" alt="Momen Indah 11" loading="lazy"></div>
+                <div class="gallery-item animate-item scale-up"><img src="G12.jpg" alt="Momen Indah 12" loading="lazy"></div>
+                <div class="gallery-item animate-item scale-up"><img src="G13.jpg" alt="Momen Indah 13" loading="lazy"></div>
+                <div class="gallery-item animate-item scale-up"><img src="G14.jpg" alt="Momen Indah 14" loading="lazy"></div>
+                <div class="gallery-item animate-item scale-up"><img src="photo_2026-06-12_20-36-25.jpg" alt="Momen Indah 15" loading="lazy"></div>
+                <div class="gallery-item animate-item scale-up"><img src="photo_2026-06-12_20-36-28.jpg" alt="Momen Indah 16" loading="lazy"></div>
               </div>
             </section>
 
             <!-- SECTION 6: WEDDING GIFT -->
             <section class="section" id="kado">
               <div class="section-title-wrapper">
-                <h3 class="section-title">Kado Pernikahan</h3>
-                <p class="section-subtitle">Doa restu Anda merupakan karunia terindah bagi kami. Namun jika Anda ingin memberikan tanda kasih, Anda dapat mengirimkannya melalui:</p>
+                <h3 class="section-title animate-item split-chars">Kado Pernikahan</h3>
+                <p class="section-subtitle animate-item split-words">Doa restu Anda merupakan karunia terindah bagi kami. Namun jika Anda ingin memberikan tanda kasih, Anda dapat mengirimkannya melalui:</p>
               </div>
 
-              <div class="card glassmorphism gift-card">
-                <div class="gift-icon"><i class="fa-solid fa-gift"></i></div>
+              <div class="card glassmorphism gift-card animate-item scale-up">
+                <div class="gift-icon animate-item"><i class="fa-solid fa-gift"></i></div>
                 
                 <!-- Gift Account 1 -->
-                <div class="bank-account-box">
+                <div class="bank-account-box animate-item">
                   <div class="bank-name">BANK MANDIRI</div>
                   <div class="account-number" id="accMandiri">1234567890</div>
                   <div class="account-holder">a.n Al Fajar Nur</div>
@@ -351,7 +359,7 @@
                 </div>
 
                 <!-- Gift Account 2 -->
-                <div class="bank-account-box">
+                <div class="bank-account-box animate-item">
                   <div class="bank-name">BANK BCA</div>
                   <div class="account-number" id="accBCA">9876543210</div>
                   <div class="account-holder">a.n Nadila Eka Wahyuni</div>
@@ -361,7 +369,7 @@
                 </div>
 
                 <!-- Shipping Address -->
-                <div class="shipping-box">
+                <div class="shipping-box animate-item">
                   <div class="shipping-title"><i class="fa-solid fa-truck-ramp-box"></i> Kirim Kado Fisik</div>
                   <p class="shipping-address" id="shipAddress">Jl Raja Alam No 35 Desa Bangkir, Kec. Dampal Selatan, Kabupaten Toli-Toli, Sulawesi Tengah 94352</p>
                   <button class="copy-btn" onclick="copyText('shipAddress', this)">
@@ -374,12 +382,12 @@
             <!-- SECTION 7: KIRIM UCAPAN -->
             <section class="section" id="ucapan">
               <div class="section-title-wrapper">
-                <h3 class="section-title">Kirim Ucapan & Doa</h3>
-                <p class="section-subtitle">Berikan doa restu dan ucapan hangat Anda untuk kebahagiaan kami.</p>
+                <h3 class="section-title animate-item split-chars">Kirim Ucapan & Doa</h3>
+                <p class="section-subtitle animate-item split-words">Berikan doa restu dan ucapan hangat Anda untuk kebahagiaan kami.</p>
               </div>
 
               <div class="card glassmorphism rsvp-card">
-                <form id="rsvpForm">
+                <form id="rsvpForm" class="animate-item">
                   <div class="form-group">
                     <label for="rsvpName"><i class="fa-regular fa-user"></i> Nama Lengkap</label>
                     <input type="text" id="rsvpName" placeholder="Masukkan nama Anda..." required>
@@ -414,7 +422,7 @@
                 </form>
 
                 <!-- Guestbook List -->
-                <div class="guestbook-container">
+                <div class="guestbook-container animate-item">
                   <h4 class="guestbook-title"><i class="fa-solid fa-comments"></i> Ucapan & Doa (<span id="wishesCount">0</span>)</h4>
                   <div class="guestbook-list" id="wishesList">
                     <!-- Wishes list will be populated dynamically from JS -->
@@ -425,13 +433,13 @@
 
             <!-- SECTION 8: UCAPAN TERIMAKASIH -->
             <section class="section" id="terimakasih">
-              <div class="card glassmorphism thank-you-card">
-                <div class="thank-you-heart"><i class="fa-solid fa-heart animate-pulse"></i></div>
-                <h3 class="thank-you-title">Terima Kasih</h3>
-                <p class="thank-you-text">Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir dan memberikan doa restu untuk pernikahan kami.</p>
-                <p class="thank-you-closing">Kami yang berbahagia,</p>
-                <h2 class="couple-closing-name">Fajar & Nadila</h2>
-                <p class="family-closing-names">Keluarga Bapak Hi. Muhammad & Ibu Hj. Sitti<br>Keluarga Bapak Hi. Abdul Azis & Ibu Hj. Asniati</p>
+              <div class="card glassmorphism thank-you-card animate-item scale-up">
+                <div class="thank-you-heart animate-item"><i class="fa-solid fa-heart animate-pulse"></i></div>
+                <h3 class="thank-you-title animate-item split-words">Terima Kasih</h3>
+                <p class="thank-you-text animate-item split-words">Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir dan memberikan doa restu untuk pernikahan kami.</p>
+                <p class="thank-you-closing animate-item">Kami yang berbahagia,</p>
+                <h2 class="couple-closing-name animate-item split-words">Fajar & Nadila</h2>
+                <p class="family-closing-names animate-item">Keluarga Bapak Hi. Muhammad & Ibu Hj. Sitti<br>Keluarga Bapak Hi. Abdul Azis & Ibu Hj. Asniati</p>
               </div>
             </section>
 

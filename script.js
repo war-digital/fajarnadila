@@ -117,13 +117,94 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 4000);
   }
 
+  // Card Background Slideshow (G1, G2, G4) - Horizontal Slide
+  const cardTrack = document.getElementById('cardSlideshowTrack');
+  let currentCardIndex = 0;
+  const totalCardImages = 3;
+  if (cardTrack) {
+    setInterval(() => {
+      currentCardIndex = (currentCardIndex + 1) % totalCardImages;
+      const offset = currentCardIndex * 33.333;
+      cardTrack.style.transform = `translate3d(${-offset}%, 0, 0)`;
+    }, 4500);
+  }
 
-  // --- 5. BUKA UNDANGAN & MUSIC CONTROL ---
+
+  // --- 5. BUKA UNDANGAN, MUSIC CONTROL, & SCROLL ANIMATIONS ---
   const openInvBtn = document.getElementById('openInvitationBtn');
   const mainContent = document.getElementById('mainContent');
   const bottomNav = document.getElementById('bottomNav');
   const bgMusic = document.getElementById('bgMusic');
   const musicToggleBtn = document.getElementById('musicToggleBtn');
+
+  // Text Splitting Utility for characters and words
+  function initTextSplitting() {
+    const charElements = document.querySelectorAll('.split-chars');
+    charElements.forEach(el => {
+      const text = el.textContent.trim();
+      el.innerHTML = '';
+      
+      [...text].forEach((char, index) => {
+        const span = document.createElement('span');
+        span.classList.add('char-item');
+        span.style.setProperty('--char-index', index);
+        span.innerHTML = char === ' ' ? '&nbsp;' : char;
+        el.appendChild(span);
+      });
+    });
+
+    const wordElements = document.querySelectorAll('.split-words');
+    wordElements.forEach(el => {
+      const text = el.textContent.trim();
+      const words = text.split(/\s+/);
+      el.innerHTML = '';
+      
+      words.forEach((word, index) => {
+        const span = document.createElement('span');
+        span.classList.add('word-item');
+        span.style.setProperty('--word-index', index);
+        span.innerHTML = word;
+        el.appendChild(span);
+        
+        if (index < words.length - 1) {
+          el.appendChild(document.createTextNode(' '));
+        }
+      });
+    });
+  }
+
+  // Initialize text splits immediately on load
+  initTextSplitting();
+
+  function initAnimations() {
+    const animateObserverOptions = {
+      root: document.getElementById('mainContent'),
+      threshold: 0.05
+    };
+
+    const animateObserver = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const section = entry.target;
+          const animItems = section.querySelectorAll('.animate-item');
+          animItems.forEach((item, index) => {
+            let delay = index * 450; // Slowly stagger items one-by-one
+            // Group gallery items with a quick stagger after heading/subheading reveal
+            if (item.classList.contains('gallery-item')) {
+              delay = 600 + (index - 2) * 80;
+            }
+            item.style.transitionDelay = `${delay}ms`;
+            item.classList.add('show');
+          });
+          observer.unobserve(section);
+        }
+      });
+    }, animateObserverOptions);
+
+    document.querySelectorAll('.section').forEach(section => {
+      animateObserver.observe(section);
+    });
+  }
 
   if (openInvBtn) {
     openInvBtn.addEventListener('click', () => {
@@ -150,6 +231,9 @@ document.addEventListener('DOMContentLoaded', () => {
         statusBar.style.color = '#1b4332';
         statusBar.style.textShadow = 'none';
       }
+
+      // Initialize scroll animations
+      initAnimations();
     });
   }
 
@@ -241,15 +325,29 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // Scrollspy logic: update active nav item based on viewport scroll inside mainContent
+  // Scrollspy & Parallax logic: update background and active nav item based on viewport scroll inside mainContent
+  const globalBg = document.querySelector('.global-bg');
+
   if (mainContent) {
     mainContent.addEventListener('scroll', () => {
+      // 1. Parallax background scroll effect
+      if (globalBg) {
+        const scrollTop = mainContent.scrollTop;
+        const scrollHeight = mainContent.scrollHeight - mainContent.clientHeight;
+        if (scrollHeight > 0) {
+          const scrollFraction = scrollTop / scrollHeight;
+          const yOffset = scrollFraction * 60; // Max offset of 60px matching CSS
+          globalBg.style.transform = `translate3d(0, ${-yOffset}px, 0)`;
+        }
+      }
+
+      // 2. Scrollspy logic
       let currentSectionId = '';
+      const scrollPosition = mainContent.scrollTop;
       
       sections.forEach(section => {
         const sectionTop = section.offsetTop - 50; // offset tolerancy
         const sectionHeight = section.clientHeight;
-        const scrollPosition = mainContent.scrollTop;
         
         if (scrollPosition >= sectionTop && scrollPosition < (sectionTop + sectionHeight)) {
           currentSectionId = section.getAttribute('id');

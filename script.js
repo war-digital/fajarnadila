@@ -167,34 +167,34 @@ document.addEventListener('DOMContentLoaded', () => {
         const item = entry.target;
         
         // Stagger delay applies only if multiple elements enter the viewport in the same frame
-        let delay = index * 150; 
+        let delay = index * 200; /* Stagger antar-elemen dasar diperlambat ke 200ms */
         
         // Koreografi jeda animasi khusus untuk Section 2
         if (item.classList.contains('mempelai-oval-frame')) {
           delay = 0; // Mulai zoom in oval background segera
         } else if (item.closest('#mempelai') && item.classList.contains('section-title')) {
-          delay = 1000; // Tunggu 1 detik hingga oval cukup besar baru judul memudar masuk
+          delay = 1400; // Tunggu 1.4 detik hingga oval cukup besar baru judul memudar masuk
         } else if (item.closest('#mempelai') && item.classList.contains('section-subtitle')) {
-          delay = 1200; // Tunggu 1.2 detik baru subjudul memudar masuk
+          delay = 1700; // Tunggu 1.7 detik baru subjudul memudar masuk
         } else if (item.closest('.groom-card') || item.closest('.bride-card')) {
           if (item.classList.contains('groom-card') || item.classList.contains('bride-card')) {
-            delay = delay + 1800; // Kartu meluncur setelah jeda 1.8 detik
+            delay = delay + 2400; // Kartu meluncur setelah jeda 2.4 detik (oval sudah stabil)
           } else {
             // Teks identitas di dalam kartu (nama, bio, orang tua) muncul melayang satu-satu dari atas ke bawah
             const card = item.closest('.groom-card') || item.closest('.bride-card');
             const textItems = Array.from(card.querySelectorAll('.animate-item.slide-down'));
             const textIndex = textItems.indexOf(item);
-            delay = 2400 + (textIndex * 200); // Berturut-turut: 2.4s, 2.6s, 2.8s, 3.0s, 3.2s
+            delay = 3200 + (textIndex * 300); // Berturut-turut lebih lambat: 3.2s, 3.5s, 3.8s, 4.1s
           }
         }
         // Koreografi jeda animasi khusus untuk Section 3 (Rangkaian Acara) - DELAYED ENTER
         else if (item.closest('#acara')) {
           if (item.classList.contains('event-header-plate')) {
-            delay = 400; // Tunggu 0.4 detik (setelah user berhenti scroll) baru Save the Date meluncur turun
+            delay = 800; // Tunggu 0.8 detik (setelah user berhenti scroll) baru Save the Date meluncur turun
           } else if (item.classList.contains('slide-left')) {
-            delay = 1000; // Tunggu 1.0 detik baru kartu Akad meluncur masuk dari kiri
+            delay = 2000; // Tunggu 2.0 detik baru kartu Akad meluncur masuk dari kiri
           } else if (item.classList.contains('slide-right')) {
-            delay = 1500; // Tunggu 1.5 detik baru kartu Resepsi meluncur masuk dari kanan (secara bergantian)
+            delay = 3200; // Tunggu 3.2 detik baru kartu Resepsi meluncur masuk dari kanan (secara bergantian)
           }
         }
         
@@ -226,7 +226,9 @@ document.addEventListener('DOMContentLoaded', () => {
       
       // 2. Show main content & bottom navigation bar
       mainContent.classList.add('active');
-      bottomNav.classList.add('active');
+      if (bottomNav) {
+        bottomNav.classList.add('active');
+      }
       
       // 3. Play background music
       if (bgMusic) {

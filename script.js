@@ -151,14 +151,14 @@ document.addEventListener('DOMContentLoaded', () => {
   function initAnimations() {
     const animateObserverOptions = {
       root: document.getElementById('mainContent'),
-      threshold: 0.12 // Trigger when 12% of the element itself is visible for a highly responsive scroll feel
+      threshold: 0.22 // Diubah dari 0.12 ke 0.22 agar animasi baru terpicu saat elemen sudah masuk cukup dalam di layar
     };
 
     const animateObserver = new IntersectionObserver((entries) => {
       // Filter entries that are entering the viewport
       const intersectingEntries = entries.filter(e => e.isIntersecting);
       
-      // Sort intersecting entries by their document order to ensure consistent top-to-bottom stagger sequence
+      // Sort intersectingEntries by their document order to ensure consistent top-to-bottom stagger sequence
       intersectingEntries.sort((a, b) => {
         return a.target.compareDocumentPosition(b.target) & Node.DOCUMENT_POSITION_FOLLOWING ? -1 : 1;
       });
@@ -187,6 +187,16 @@ document.addEventListener('DOMContentLoaded', () => {
             delay = 2400 + (textIndex * 200); // Berturut-turut: 2.4s, 2.6s, 2.8s, 3.0s, 3.2s
           }
         }
+        // Koreografi jeda animasi khusus untuk Section 3 (Rangkaian Acara) - DELAYED ENTER
+        else if (item.closest('#acara')) {
+          if (item.classList.contains('event-header-plate')) {
+            delay = 400; // Tunggu 0.4 detik (setelah user berhenti scroll) baru Save the Date meluncur turun
+          } else if (item.classList.contains('slide-left')) {
+            delay = 1000; // Tunggu 1.0 detik baru kartu Akad meluncur masuk dari kiri
+          } else if (item.classList.contains('slide-right')) {
+            delay = 1500; // Tunggu 1.5 detik baru kartu Resepsi meluncur masuk dari kanan (secara bergantian)
+          }
+        }
         
         item.style.transitionDelay = `${delay}ms`;
         item.classList.add('show');
@@ -207,6 +217,7 @@ document.addEventListener('DOMContentLoaded', () => {
       animateObserver.observe(item);
     });
   }
+
 
   if (openInvBtn) {
     openInvBtn.addEventListener('click', () => {

@@ -882,31 +882,6 @@ body {
   line-height: 1.5;
 }
 
-.mempelai-divider {
-  text-align: center;
-  margin: 30px 0;
-  position: relative;
-}
-.mempelai-divider::before {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 0;
-  width: 100%;
-  height: 1px;
-  background: radial-gradient(circle, rgba(212,175,55,0.4) 0%, rgba(255,255,255,0) 80%);
-  z-index: 1;
-}
-.mempelai-divider i {
-  position: relative;
-  z-index: 2;
-  font-size: 1.5rem;
-  background: var(--bg-cream-dark);
-  padding: 0 15px;
-  color: var(--accent-color);
-  text-shadow: 0 2px 5px rgba(27, 67, 50, 0.1);
-}
-
 /* 
    =========================================
    SECTION 3: RANGKAIAN ACARA
@@ -2049,6 +2024,11 @@ body {
   overflow: hidden;
 }
 
+.groom-card {
+  margin-bottom: 40px !important; /* Memberikan jarak vertikal antara kartu pria dan wanita */
+}
+
+
 .groom-card .mempelai-photo-wrapper, 
 .bride-card .mempelai-photo-wrapper {
   width: calc(100% - 48px);
@@ -2059,7 +2039,58 @@ body {
   position: relative;
   z-index: 2;
   overflow: visible;
+
+  /* Keadaan Awal (Sebelum Kartu Selesai Masuk) - Slide-down Entry */
+  opacity: 0;
+  transform: translate3d(0, -80px, 0); /* Awalnya terangkat di atas kartu */
+  transition: opacity 1.4s cubic-bezier(0.19, 1, 0.22, 1), transform 1.4s cubic-bezier(0.19, 1, 0.22, 1);
+  will-change: opacity, transform;
 }
+
+/* Ketika Kartu Mempelai Muncul (Terpicu Scroll) */
+.groom-card.show .mempelai-photo-wrapper,
+.bride-card.show .mempelai-photo-wrapper {
+  opacity: 1;
+  transform: translate3d(0, 0, 0); /* Turun masuk ke posisi normal */
+  transition-delay: 0.6s; /* Jeda muncul setelah kartu mempelai masuk terlebih dahulu */
+}
+
+/* Efek Melayang Lambat (Floating Animation) di dalam kartu setelah muncul */
+.groom-card .mempelai-slideshow {
+  animation: floatGroom 6s ease-in-out infinite;
+}
+.groom-card .photo-border-effect {
+  animation: rotateBorder 12s linear infinite, floatGroom 6s ease-in-out infinite;
+}
+
+.bride-card .mempelai-slideshow {
+  animation: floatBride 6s ease-in-out infinite;
+  animation-delay: 3s; /* Gerakan melayang saling bergantian */
+}
+.bride-card .photo-border-effect {
+  animation: rotateBorder 12s linear infinite, floatBride 6s ease-in-out infinite;
+  animation-delay: 0s, 3s; /* Rotate mulai instan, float menyusul dengan delay 3 detik */
+}
+
+@keyframes floatGroom {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px); /* Melayang naik turun sejauh 8px */
+  }
+}
+
+@keyframes floatBride {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px); /* Melayang naik turun sejauh 8px */
+  }
+}
+
+
 
 .groom-card .mempelai-slideshow,
 .bride-card .mempelai-slideshow {
@@ -2091,26 +2122,39 @@ body {
   text-align: center;
 }
 
-/* Membuat kartu mempelai transparan agar gambar background oval nampak */
+/* Menghilangkan kartu mempelai agar semua informasi langsung menyatu di atas background oval G5.jpg */
 #mempelai .card {
-  background: rgba(253, 251, 247, 0.65) !important; /* Menggunakan cream dengan opacity 0.65 agar lebih hangat dan kontras */
-  border: 1px solid rgba(212, 175, 55, 0.35) !important; /* Border emas tipis mewah */
-  backdrop-filter: blur(24px) !important; /* Blur ditingkatkan ke 24px agar detail foto background tidak mengganggu teks */
-  -webkit-backdrop-filter: blur(24px) !important;
-  box-shadow: 0 10px 35px rgba(27, 67, 50, 0.15) !important;
+  background: transparent !important;
+  border: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  box-shadow: none !important;
 }
 
-/* Memperjelas keterbacaan identitas mempelai (teks lebih tebal, warna lebih gelap, dan text-shadow glow putih) */
+/* Memperjelas keterbacaan identitas mempelai (warna hitam, font nama menggunakan Brittany Signature) */
 #mempelai .mempelai-name {
-  color: #1b4332 !important; /* Hijau emerald gelap mewah */
-  font-size: 1.45rem;
-  font-weight: 700;
-  letter-spacing: 0.5px;
-  text-shadow: 0 0 8px #ffffff, 0 0 4px #ffffff, 0 1px 2px rgba(0, 0, 0, 0.15);
+  color: #000000 !important; /* Semua warna font diganti menjadi hitam */
+  font-family: var(--font-cursive) !important; /* Menggunakan font Brittany Signature */
+  font-size: 1.22rem; /* Disesuaikan agar nama panjang muat 1 baris di layar HP tanpa overflow */
+  font-weight: normal;
+  letter-spacing: 0px;
+  white-space: nowrap !important; /* Memaksa teks nama agar tetap dalam 1 baris */
+  text-align: center !important; /* Memastikan teks berada di tengah kapsul */
+  
+  /* Kapsul Latar Belakang (Soft Plate) untuk Keterbacaan Maksimal */
+  background: rgba(253, 251, 247, 0.82) !important; /* Cream hangat dengan opasitas 82% agar teks hitam sangat menonjol */
+  border: 1px solid rgba(212, 175, 55, 0.4) !important; /* Garis tepi emas tipis mewah */
+  padding: 6px 18px !important; /* Jarak di dalam kapsul disesuaikan */
+  border-radius: 30px !important; /* Sudut bulat sempurna berbentuk kapsul */
+  display: inline-block !important; /* Mengikuti panjang teks nama */
+  margin: 0 auto 15px auto !important; /* Margin bawah untuk memberi jarak ke bio */
+  box-shadow: 0 4px 15px rgba(27, 67, 50, 0.06) !important; /* Bayangan halus */
+  max-width: 90% !important; /* Batas lebar kapsul agar tidak menabrak sisi luar kartu */
+  box-sizing: border-box !important;
 }
 
 #mempelai .mempelai-bio {
-  color: #9e7815 !important; /* Emas gelap mewah */
+  color: #000000 !important; /* Semua warna font diganti menjadi hitam */
   font-weight: 700;
   font-size: 0.75rem;
   text-transform: uppercase;
@@ -2126,7 +2170,7 @@ body {
 }
 
 #mempelai .parent-label {
-  color: #2d6a4f !important; /* Hijau sedang untuk pemisah label */
+  color: #000000 !important; /* Semua warna font diganti menjadi hitam */
   font-weight: 700;
   font-size: 0.75rem;
   text-transform: uppercase;
@@ -2136,7 +2180,7 @@ body {
 }
 
 #mempelai .parent-names {
-  color: #121e18 !important; /* Hitam kehijauan gelap */
+  color: #000000 !important; /* Semua warna font diganti menjadi hitam */
   font-weight: 700;
   font-size: 0.95rem;
   line-height: 1.6;

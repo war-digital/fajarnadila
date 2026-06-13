@@ -207,13 +207,15 @@ document.addEventListener('DOMContentLoaded', () => {
         } else if (item.closest('.groom-card') || item.closest('.bride-card')) {
           if (item.classList.contains('groom-card') || item.classList.contains('bride-card')) {
             delay = delay + 1800; // Kartu meluncur setelah jeda 1.8 detik
+          } else if (item.classList.contains('photo-ornament')) {
+            delay = 2200; // Semua ornamen pojok foto muncul bersamaan di 2.2 detik (ketika kartu hampir selesai meluncur)
           } else {
             // Teks identitas di dalam kartu (nama, bio, orang tua) muncul melayang satu-satu dari atas ke bawah
-            // Stagger dimulai dari 2400ms setelah scroll menyentuh kartu (sehingga beranimasi saat kartu sedang bergeser)
+            // Stagger dihitung khusus untuk elemen teks saja (mengabaikan ornamen pojok)
             const card = item.closest('.groom-card') || item.closest('.bride-card');
-            const innerItems = Array.from(card.querySelectorAll('.animate-item:not(.groom-card):not(.bride-card)'));
-            const innerIndex = innerItems.indexOf(item);
-            delay = 2400 + (innerIndex * 200); // Berturut-turut: 2.4s, 2.6s, 2.8s, 3.0s
+            const textItems = Array.from(card.querySelectorAll('.animate-item.slide-down'));
+            const textIndex = textItems.indexOf(item);
+            delay = 2500 + (textIndex * 200); // Berturut-turut: 2.5s, 2.7s, 2.9s, 3.1s
           }
         }
         

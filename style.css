@@ -2046,7 +2046,12 @@ body {
 /* Mempelai Card Refactor - Full Width Rectangular Card-Sized Photos */
 .groom-card, .bride-card {
   padding: 0 !important;
-  overflow: hidden;
+  overflow: visible !important; /* Diubah menjadi visible agar ornamen pojok di belakang foto tidak terpotong */
+}
+
+.mempelai-photo-container {
+  position: relative;
+  width: 100%;
 }
 
 .groom-card .mempelai-photo-wrapper, 
@@ -2057,8 +2062,73 @@ body {
   border-radius: var(--radius-md); /* Sudut melingkar lembut */
   padding: 0;
   position: relative;
-  overflow: hidden;
+  overflow: hidden; /* Menampilkan seluruh bagian foto tanpa terpotong */
   border: 1px solid rgba(27, 67, 50, 0.08); /* Border tipis estetik */
+  z-index: 2; /* Ditambahkan z-index agar berada di depan ornamen pojok */
+}
+
+/* Ornamen Pojok di Belakang Foto Mempelai */
+.photo-ornament {
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  object-fit: contain;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0;
+}
+
+/* Posisi Awal (Default) & Transisi Lembut */
+.photo-ornament.ornament-tl {
+  top: 16px;
+  left: 16px;
+}
+.photo-ornament.ornament-tl.animate-item {
+  transform: translate3d(0, 0, 0) scale(0.4) rotate(0deg);
+  transition: opacity 1.8s cubic-bezier(0.19, 1, 0.22, 1), transform 1.8s cubic-bezier(0.19, 1, 0.22, 1) !important;
+}
+.photo-ornament.ornament-tl.animate-item.show {
+  transform: translate3d(-18px, -18px, 0) scale(1) rotate(0deg);
+  opacity: 0.9;
+}
+
+.photo-ornament.ornament-tr {
+  top: 16px;
+  right: 16px;
+}
+.photo-ornament.ornament-tr.animate-item {
+  transform: translate3d(0, 0, 0) scale(0.4) rotate(90deg);
+  transition: opacity 1.8s cubic-bezier(0.19, 1, 0.22, 1), transform 1.8s cubic-bezier(0.19, 1, 0.22, 1) !important;
+}
+.photo-ornament.ornament-tr.animate-item.show {
+  transform: translate3d(18px, -18px, 0) scale(1) rotate(90deg);
+  opacity: 0.9;
+}
+
+.photo-ornament.ornament-bl {
+  bottom: 0px;
+  left: 16px;
+}
+.photo-ornament.ornament-bl.animate-item {
+  transform: translate3d(0, 0, 0) scale(0.4) rotate(-90deg);
+  transition: opacity 1.8s cubic-bezier(0.19, 1, 0.22, 1), transform 1.8s cubic-bezier(0.19, 1, 0.22, 1) !important;
+}
+.photo-ornament.ornament-bl.animate-item.show {
+  transform: translate3d(-18px, 18px, 0) scale(1) rotate(-90deg);
+  opacity: 0.9;
+}
+
+.photo-ornament.ornament-br {
+  bottom: 0px;
+  right: 16px;
+}
+.photo-ornament.ornament-br.animate-item {
+  transform: translate3d(0, 0, 0) scale(0.4) rotate(180deg);
+  transition: opacity 1.8s cubic-bezier(0.19, 1, 0.22, 1), transform 1.8s cubic-bezier(0.19, 1, 0.22, 1) !important;
+}
+.photo-ornament.ornament-br.animate-item.show {
+  transform: translate3d(18px, 18px, 0) scale(1) rotate(180deg);
+  opacity: 0.9;
 }
 
 .groom-card .mempelai-slideshow,

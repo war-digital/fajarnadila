@@ -51,6 +51,10 @@
   display: none; /* Hide scrollbar for Chrome/Safari/Edge */
 }
 
+html, body {
+  overflow-x: hidden !important;
+}
+
 body {
   font-family: var(--font-sans);
   background-color: #eae0d5; /* Outer desktop background */
@@ -536,6 +540,7 @@ body {
   width: 100%;
   height: 100%;
   overflow-y: auto;
+  overflow-x: hidden !important; /* Mencegah geser kanan kiri */
   scroll-behavior: smooth;
   z-index: 10;
   opacity: 0;
@@ -632,6 +637,7 @@ body {
   position: relative;
   scroll-margin-top: 30px;
   flex-shrink: 0;
+  overflow-x: hidden !important; /* Mencegah elemen animasi menyenggol layar ke samping */
 }
 
 .section-title-wrapper {
@@ -1819,13 +1825,36 @@ body {
 .quote-card {
   position: relative;
   padding: 45px 32px;
-  background: rgba(255, 255, 255, 0.7);
+  background-image: url('G15.jpg') !important; /* Menggunakan G15.jpg sebagai gambar latar belakang */
+  background-size: cover;
+  background-position: center;
   border-radius: var(--radius-lg);
-  border: 1px solid rgba(255, 255, 255, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.6) !important;
   box-shadow: var(--shadow-premium);
   text-align: center;
   overflow: hidden;
+  z-index: 1;
 }
+
+/* Memastikan konten di dalam quote-card berada di atas overlay */
+.quote-card > * {
+  position: relative;
+  z-index: 2;
+}
+
+/* Overlay transparan agar teks tetap terbaca sangat jelas */
+.quote-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.76) !important; /* Overlay putih lembut dengan opasitas 76% */
+  z-index: 1;
+  pointer-events: none;
+}
+
 
 /* Bingkai Estetik dengan Sudut Emas */
 .quote-card .decorative-border {
@@ -1989,7 +2018,7 @@ body {
   pointer-events: none;
 }
 
-/* Remove overlay from oval frame to show full G5.jpg background clearly */
+/* Efek gradasi cream transparan di bagian bawah bingkai oval untuk kontras tulisan */
 .mempelai-oval-frame::after {
   content: '';
   position: absolute;
@@ -1997,7 +2026,7 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
-  background: none;
+  background: linear-gradient(to bottom, rgba(253, 251, 247, 0) 45%, rgba(253, 251, 247, 0.65) 72%, rgba(253, 251, 247, 0.9) 100%) !important;
   z-index: 2;
   pointer-events: none;
 }
@@ -2116,10 +2145,17 @@ body {
   border-radius: 50%;
 }
 
-/* Pembungkus informasi teks dengan padding pasca foto seukuran card */
+/* Pembungkus informasi teks dengan latar belakang transparan lembut agar terbaca di atas background foto */
 .mempelai-details {
   padding: 24px 20px;
   text-align: center;
+  background: rgba(253, 251, 247, 0.72) !important; /* Latar belakang cream transparan 72% */
+  border: 1px solid rgba(212, 175, 55, 0.25) !important; /* Bingkai emas tipis mewah */
+  border-radius: var(--radius-md) !important; /* Sudut membulat lembut */
+  margin: 15px 24px 24px 24px !important; /* Inset dari batas luar kartu agar terlihat melayang indah */
+  box-shadow: 0 8px 25px rgba(27, 67, 50, 0.05) !important; /* Bayangan halus */
+  backdrop-filter: blur(12px) !important; /* Blur kaca untuk meningkatkan kejelasan teks */
+  -webkit-backdrop-filter: blur(12px) !important;
 }
 
 /* Menghilangkan kartu mempelai agar semua informasi langsung menyatu di atas background oval G5.jpg */
@@ -2135,22 +2171,33 @@ body {
 #mempelai .mempelai-name {
   color: #000000 !important; /* Semua warna font diganti menjadi hitam */
   font-family: var(--font-cursive) !important; /* Menggunakan font Brittany Signature */
-  font-size: 1.22rem; /* Disesuaikan agar nama panjang muat 1 baris di layar HP tanpa overflow */
-  font-weight: normal;
+  font-size: 1.45rem; /* Disesuaikan agar tetap proporsional dan tidak overflow */
+  font-weight: bold !important; /* Menebalkan tulisan */
+  -webkit-text-stroke: 0.8px #000000; /* Menambah ketebalan garis tulisan tangan (cursive) agar terlihat jelas */
   letter-spacing: 0px;
   white-space: nowrap !important; /* Memaksa teks nama agar tetap dalam 1 baris */
-  text-align: center !important; /* Memastikan teks berada di tengah kapsul */
+  text-align: center !important;
+  display: block !important;
+  margin: 0 auto 12px auto !important; /* Jarak ke elemen di bawahnya */
   
-  /* Kapsul Latar Belakang (Soft Plate) untuk Keterbacaan Maksimal */
-  background: rgba(253, 251, 247, 0.82) !important; /* Cream hangat dengan opasitas 82% agar teks hitam sangat menonjol */
-  border: 1px solid rgba(212, 175, 55, 0.4) !important; /* Garis tepi emas tipis mewah */
-  padding: 6px 18px !important; /* Jarak di dalam kapsul disesuaikan */
-  border-radius: 30px !important; /* Sudut bulat sempurna berbentuk kapsul */
-  display: inline-block !important; /* Mengikuti panjang teks nama */
-  margin: 0 auto 15px auto !important; /* Margin bawah untuk memberi jarak ke bio */
-  box-shadow: 0 4px 15px rgba(27, 67, 50, 0.06) !important; /* Bayangan halus */
-  max-width: 90% !important; /* Batas lebar kapsul agar tidak menabrak sisi luar kartu */
-  box-sizing: border-box !important;
+  /* Hilangkan stabilo putih (kapsul) */
+  background: transparent !important;
+  border: none !important;
+  padding: 0 !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+  
+  /* Efek bayangan putih di belakang huruf hitam agar tetap kontras di atas foto */
+  text-shadow: 0 0 8px #ffffff, 0 0 5px #ffffff, 0 0 2px #ffffff !important;
+}
+
+/* Khusus untuk nama mempelai wanita agar boleh turun ke baris kedua (wrap) */
+#mempelai .bride-card .mempelai-name {
+  white-space: normal !important; /* Izinkan teks terpecah menjadi 2 baris */
+  font-size: 1.35rem !important; /* Sedikit diperkecil agar proporsional saat 2 baris */
+  line-height: 1.45 !important; /* Jarak baris yang ideal untuk font cursive */
+  display: block !important;
+  max-width: 100% !important;
 }
 
 #mempelai .mempelai-bio {

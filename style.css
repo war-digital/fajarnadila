@@ -2043,113 +2043,46 @@ body {
   font-weight: 700;
 }
 
-/* Mempelai Card Refactor - Full Width Rectangular Card-Sized Photos */
+/* Mempelai Card Refactor - Oval Photos */
 .groom-card, .bride-card {
   padding: 0 !important;
-  overflow: visible !important; /* Diubah menjadi visible agar ornamen pojok di belakang foto tidak terpotong */
-}
-
-.mempelai-photo-container {
-  position: relative;
-  width: 100%;
+  overflow: hidden;
 }
 
 .groom-card .mempelai-photo-wrapper, 
 .bride-card .mempelai-photo-wrapper {
-  width: calc(100% - 32px);
-  height: 280px; /* Tinggi proporsional */
-  margin: 16px auto 0 auto; /* Tengah secara horizontal, margin 16px di atas */
-  border-radius: var(--radius-md); /* Sudut melingkar lembut */
-  padding: 0;
+  width: calc(100% - 48px);
+  height: 300px;
+  margin: 20px auto 12px auto;
+  border-radius: 50%; /* Bentuk oval secara alami dari lebar > tinggi atau tinggi > lebar */
+  padding: 6px;
   position: relative;
-  overflow: hidden; /* Menampilkan seluruh bagian foto tanpa terpotong */
-  border: 1px solid rgba(27, 67, 50, 0.08); /* Border tipis estetik */
-  z-index: 2; /* Ditambahkan z-index agar berada di depan ornamen pojok */
-}
-
-/* Ornamen Pojok di Belakang Foto Mempelai */
-.photo-ornament {
-  position: absolute;
-  width: 60px;
-  height: 60px;
-  object-fit: contain;
-  z-index: 1;
-  pointer-events: none;
-  opacity: 0;
-}
-
-/* Posisi Awal (Default) & Transisi Lembut */
-.photo-ornament.ornament-tl {
-  top: 16px;
-  left: 16px;
-}
-.photo-ornament.ornament-tl.animate-item {
-  transform: translate3d(0, 0, 0) scale(0.4) rotate(0deg);
-  transition: opacity 1.8s cubic-bezier(0.19, 1, 0.22, 1), transform 1.8s cubic-bezier(0.19, 1, 0.22, 1) !important;
-}
-.photo-ornament.ornament-tl.animate-item.show {
-  transform: translate3d(-18px, -18px, 0) scale(1) rotate(0deg);
-  opacity: 0.9;
-}
-
-.photo-ornament.ornament-tr {
-  top: 16px;
-  right: 16px;
-}
-.photo-ornament.ornament-tr.animate-item {
-  transform: translate3d(0, 0, 0) scale(0.4) rotate(90deg);
-  transition: opacity 1.8s cubic-bezier(0.19, 1, 0.22, 1), transform 1.8s cubic-bezier(0.19, 1, 0.22, 1) !important;
-}
-.photo-ornament.ornament-tr.animate-item.show {
-  transform: translate3d(18px, -18px, 0) scale(1) rotate(90deg);
-  opacity: 0.9;
-}
-
-.photo-ornament.ornament-bl {
-  bottom: 0px;
-  left: 16px;
-}
-.photo-ornament.ornament-bl.animate-item {
-  transform: translate3d(0, 0, 0) scale(0.4) rotate(-90deg);
-  transition: opacity 1.8s cubic-bezier(0.19, 1, 0.22, 1), transform 1.8s cubic-bezier(0.19, 1, 0.22, 1) !important;
-}
-.photo-ornament.ornament-bl.animate-item.show {
-  transform: translate3d(-18px, 18px, 0) scale(1) rotate(-90deg);
-  opacity: 0.9;
-}
-
-.photo-ornament.ornament-br {
-  bottom: 0px;
-  right: 16px;
-}
-.photo-ornament.ornament-br.animate-item {
-  transform: translate3d(0, 0, 0) scale(0.4) rotate(180deg);
-  transition: opacity 1.8s cubic-bezier(0.19, 1, 0.22, 1), transform 1.8s cubic-bezier(0.19, 1, 0.22, 1) !important;
-}
-.photo-ornament.ornament-br.animate-item.show {
-  transform: translate3d(18px, 18px, 0) scale(1) rotate(180deg);
-  opacity: 0.9;
+  z-index: 2;
+  overflow: visible;
 }
 
 .groom-card .mempelai-slideshow,
 .bride-card .mempelai-slideshow {
   width: 100%;
   height: 100%;
-  border-radius: var(--radius-md);
-  box-shadow: none;
+  border-radius: 50%;
+  position: relative;
+  overflow: hidden;
+  z-index: 2;
+  box-shadow: var(--shadow-premium);
 }
 
 .groom-card .mempelai-slideshow img,
 .bride-card .mempelai-slideshow img {
-  border-radius: var(--radius-md);
-  object-fit: contain; /* Menampilkan seluruh bagian foto tanpa terpotong */
-  background-color: rgba(27, 67, 50, 0.05); /* Background emerald lembut untuk menyelaraskan area kosong */
+  border-radius: 50%;
+  object-fit: cover;
 }
 
-/* Sembunyikan garis border melingkar dashed yang berputar */
+/* Garis border oval dashed yang berputar */
 .groom-card .photo-border-effect,
 .bride-card .photo-border-effect {
-  display: none;
+  display: block;
+  border-radius: 50%;
 }
 
 /* Pembungkus informasi teks dengan padding pasca foto seukuran card */

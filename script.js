@@ -38,47 +38,19 @@ document.addEventListener('DOMContentLoaded', () => {
   getGuestName();
 
 
-  // --- 3. VIDEO OPENING LOGIC ---
-  const videoOverlay = document.getElementById('videoOverlay');
-  const openingVideo = document.getElementById('openingVideo');
-  const skipVideoBtn = document.getElementById('skipVideoBtn');
+  // --- 3. COVER SCREEN TEXT ANIMATION (no video) ---
   const coverScreen = document.getElementById('coverScreen');
 
-  function endVideoOverlay() {
-    if (videoOverlay && !videoOverlay.classList.contains('fade-out')) {
-      videoOverlay.classList.add('fade-out');
-      if (openingVideo) {
-        openingVideo.pause();
-      }
-      
-      // Animate cover content entries on fade-in
+  // Animate cover content entries immediately on page load
+  setTimeout(() => {
+    const textFadeElements = document.querySelectorAll('.text-fade');
+    textFadeElements.forEach((el, index) => {
       setTimeout(() => {
-        const textFadeElements = document.querySelectorAll('.text-fade');
-        textFadeElements.forEach((el, index) => {
-          setTimeout(() => {
-            el.classList.add('visible');
-          }, index * 200);
-        });
-      }, 500);
-    }
-  }
-
-  if (openingVideo) {
-    // Autoplay handling, attempt play
-    openingVideo.play().catch(e => {
-      console.log("Video autoplay blocked or failed, waiting for user click.", e);
+        el.classList.add('visible');
+      }, index * 200);
     });
-    
-    // Auto transition when video ends
-    openingVideo.addEventListener('ended', endVideoOverlay);
-  }
+  }, 500);
 
-  if (skipVideoBtn) {
-    skipVideoBtn.addEventListener('click', endVideoOverlay);
-  }
-
-  // Backup auto-skip video after 15 seconds if it gets stuck
-  setTimeout(endVideoOverlay, 15000);
 
 
   // --- 4. SLIDESHOW LOGIC ---
@@ -207,15 +179,12 @@ document.addEventListener('DOMContentLoaded', () => {
         } else if (item.closest('.groom-card') || item.closest('.bride-card')) {
           if (item.classList.contains('groom-card') || item.classList.contains('bride-card')) {
             delay = delay + 1800; // Kartu meluncur setelah jeda 1.8 detik
-          } else if (item.classList.contains('photo-ornament')) {
-            delay = 2200; // Semua ornamen pojok foto muncul bersamaan di 2.2 detik (ketika kartu hampir selesai meluncur)
           } else {
             // Teks identitas di dalam kartu (nama, bio, orang tua) muncul melayang satu-satu dari atas ke bawah
-            // Stagger dihitung khusus untuk elemen teks saja (mengabaikan ornamen pojok)
             const card = item.closest('.groom-card') || item.closest('.bride-card');
             const textItems = Array.from(card.querySelectorAll('.animate-item.slide-down'));
             const textIndex = textItems.indexOf(item);
-            delay = 2500 + (textIndex * 200); // Berturut-turut: 2.5s, 2.7s, 2.9s, 3.1s
+            delay = 2400 + (textIndex * 200); // Berturut-turut: 2.4s, 2.6s, 2.8s, 3.0s, 3.2s
           }
         }
         
